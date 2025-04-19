@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-background">
+    <!-- Animated Background with Gradient -->
+    <StackPane styleClass="animated-gradient">
+        <!-- Decorative Elements -->
+        <Group opacity="0.5" styleClass="decorative-elements">
+            <Circle centerX="100" centerY="100" radius="80" fill="#e6e6fa" opacity="0.4" />
+            <Circle centerX="800" centerY="500" radius="120" fill="#ffe6f2" opacity="0.4" />
+            <Circle centerX="700" centerY="150" radius="60" fill="#f0e6ff" opacity="0.4" />
+        </Group>
+    </StackPane>
+    
+    <!-- Main Content -->
+    <VBox alignment="CENTER" spacing="25" maxWidth="450" styleClass="login-container, fade-in">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40" />
+        </padding>
+        
+        <!-- App Logo Placeholder -->
+        <StackPane>
+            <Circle radius="60" styleClass="logo-circle" fill="#f0e6ff" />
+            <ImageView fitWidth="80" fitHeight="80" preserveRatio="true">
+                <Image url="/ui/images/logo_placeholder.png" />
+                <effect>
+                    <DropShadow color="#00000022" radius="10" spread="0.05" />
+                </effect>
+            </ImageView>
+        </StackPane>
+        
+        <!-- Title -->
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Welcome to" styleClass="app-subtitle" />
+            <Label text="Employee Management System" styleClass="app-title" wrapText="true" textAlignment="CENTER" />
+        </VBox>
+        
+        <Separator opacity="0.3" />
+        
+        <!-- Login Form -->
+        <VBox spacing="20" alignment="CENTER" styleClass="form-container, slide-in">
+            <!-- Username Field -->
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="input-container">
+                <Label text="Username" styleClass="input-label" />
+                <TextField promptText="Enter your username" styleClass="text-field" HBox.hgrow="ALWAYS" />
+            </HBox>
+            
+            <!-- Password Field -->
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="input-container">
+                <Label text="Password" styleClass="input-label" />
+                <PasswordField promptText="Enter your password" styleClass="text-field" HBox.hgrow="ALWAYS" />
+            </HBox>
+            
+            <!-- Remember Me Checkbox -->
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <CheckBox text="Remember me" styleClass="custom-checkbox" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Hyperlink text="Forgot password?" styleClass="custom-link" />
+            </HBox>
+            
+            <!-- Login Button -->
+            <Button text="Login" styleClass="primary-button" onAction="#handleLogin" prefWidth="200" prefHeight="45">
+                <graphic>
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="Login" textFill="WHITE" />
+                    </HBox>
+                </graphic>
+            </Button>
+            
+            <!-- Sign Up Link -->
+            <HBox alignment="CENTER" spacing="5">
+                <Label text="Don't have an account?" />
+                <Hyperlink text="Sign Up" styleClass="custom-link" />
+            </HBox>
+        </VBox>
+    </VBox>
+    
+    <fx:script>
+        function handleLogin() {
+            ui.UIDemoLauncher.changeScene("Dashboard.fxml");
+        }
+    </fx:script>
+</StackPane>

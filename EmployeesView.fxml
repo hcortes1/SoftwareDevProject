@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.EmployeesViewController" styleClass="vbox">
+   <children>
+      <!-- Search Section with Bubbly Container -->
+      <VBox spacing="10.0" styleClass="bubble-container">
+         <children>
+            <Label text="Search Employees" styleClass="title">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#ff69b4" radius="3.0" spread="0.05" />
+               </effect>
+            </Label>
+            
+            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="hbox">
+               <children>
+                  <TextField fx:id="searchField" prefWidth="200.0" promptText="Name, SSN, or ID">
+                     <effect>
+                        <InnerShadow color="#ffb6c140" />
+                     </effect>
+                  </TextField>
+                  <ComboBox fx:id="searchTypeComboBox" prefWidth="150.0" promptText="Search By">
+                     <effect>
+                        <InnerShadow color="#ffb6c140" />
+                     </effect>
+                  </ComboBox>
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchEmployee" text="Search">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearSearch" text="Clear">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            
+            <!-- Decorative elements -->
+            <HBox spacing="8.0" alignment="CENTER">
+               <children>
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ff85c240" />
+                  <Circle styleClass="decorative-circle" radius="4.0" fill="#ff69b440" />
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ffb6c140" />
+                  <Circle styleClass="decorative-circle" radius="4.0" fill="#ff85c240" />
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ff69b440" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+         </padding>
+      </VBox>
+      
+      <!-- Table with Employee Data -->
+      <TableView fx:id="employeeTable" prefHeight="300.0" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="First Name" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="100.0" text="Last Name" />
+            <TableColumn fx:id="ssnColumn" prefWidth="100.0" text="SSN" />
+            <TableColumn fx:id="jobTitleColumn" prefWidth="150.0" text="Job Title" />
+            <TableColumn fx:id="divisionColumn" prefWidth="150.0" text="Division" />
+            <TableColumn fx:id="salaryColumn" prefWidth="100.0" text="Salary" />
+         </columns>
+         <effect>
+            <DropShadow color="#ff69b430" radius="10.0" spread="0.05" />
+         </effect>
+      </TableView>
+      
+      <!-- Action Buttons in Bubbly Container -->
+      <VBox spacing="10.0" styleClass="bubble-container">
+         <children>
+            <HBox alignment="CENTER_RIGHT" spacing="15.0">
+               <children>
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#showAddEmployeeDialog" text="Add Employee">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#showEditEmployeeDialog" text="Edit Employee">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete Employee">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="viewPayStatementsButton" mnemonicParsing="false" onAction="#viewPayStatements" text="View Pay Statements">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            
+            <!-- Decorative elements -->
+            <HBox spacing="8.0" alignment="CENTER">
+               <children>
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ff85c240" />
+                  <Circle styleClass="decorative-circle" radius="4.0" fill="#ff69b440" />
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ffb6c140" />
+                  <Circle styleClass="decorative-circle" radius="4.0" fill="#ff85c240" />
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ff69b440" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <effect>
+      <DropShadow color="#ff69b430" radius="15.0" spread="0.05" />
+   </effect>
+</VBox>

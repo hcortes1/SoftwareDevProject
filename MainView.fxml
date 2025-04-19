@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.MainViewController" styleClass="root">
+   <top>
+      <VBox spacing="15.0" BorderPane.alignment="CENTER" styleClass="vbox">
+         <children>
+            <StackPane>
+               <children>
+                  <Label text="Employee Management System" textAlignment="CENTER" styleClass="title">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                     <effect>
+                        <DropShadow color="#ff69b4" radius="8.0" spread="0.2" />
+                     </effect>
+                  </Label>
+                  <!-- Decorative circles -->
+                  <Circle fill="#ff85c240" radius="10.0" StackPane.alignment="TOP_LEFT">
+                     <StackPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Circle>
+                  <Circle fill="#ff69b440" radius="15.0" StackPane.alignment="TOP_RIGHT">
+                     <StackPane.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </StackPane.margin>
+                  </Circle>
+                  <Circle fill="#ffb6c140" radius="8.0" StackPane.alignment="BOTTOM_LEFT">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="20.0" />
+                     </StackPane.margin>
+                  </Circle>
+               </children>
+            </StackPane>
+            
+            <HBox alignment="CENTER" spacing="20.0" styleClass="bubble-container">
+               <children>
+                  <Button fx:id="btnEmployees" mnemonicParsing="false" onAction="#showEmployeesView" text="Employees">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnReports" mnemonicParsing="false" onAction="#showReportsView" text="Reports">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnSalaryUpdate" mnemonicParsing="false" onAction="#showSalaryUpdateView" text="Salary Update">
+                     <effect>
+                        <DropShadow color="#00000040" radius="5.0" spread="0.1" />
+                     </effect>
+                     <graphic>
+                        <Circle fill="#ff85c240" radius="5.0" />
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </HBox>
+            
+            <!-- Decorative elements -->
+            <HBox spacing="10.0" alignment="CENTER">
+               <children>
+                  <Circle styleClass="decorative-circle" radius="5.0" fill="#ff85c240" />
+                  <Circle styleClass="decorative-circle" radius="8.0" fill="#ff69b440" />
+                  <Circle styleClass="decorative-circle" radius="5.0" fill="#ffb6c140" />
+                  <Circle styleClass="decorative-circle" radius="8.0" fill="#ff85c240" />
+                  <Circle styleClass="decorative-circle" radius="5.0" fill="#ff69b440" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <effect>
+            <InnerShadow color="#ffb6c140" />
+         </effect>
+      </VBox>
+   </top>
+   <center>
+      <StackPane fx:id="contentArea" BorderPane.alignment="CENTER" styleClass="stack-pane">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#ff69b420" radius="10.0" spread="0.05" />
+         </effect>
+      </StackPane>
+   </center>
+   <bottom>
+      <VBox spacing="5.0" BorderPane.alignment="CENTER" styleClass="bubble-container">
+         <children>
+            <!-- Decorative elements -->
+            <HBox spacing="10.0" alignment="CENTER">
+               <children>
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ff85c240" />
+                  <Circle styleClass="decorative-circle" radius="5.0" fill="#ff69b440" />
+                  <Circle styleClass="decorative-circle" radius="3.0" fill="#ffb6c140" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+               <children>
+                  <Label fx:id="statusLabel" text="Ready" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="15.0" right="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+   <effect>
+      <DropShadow color="#ff69b430" radius="15.0" spread="0.05" />
+   </effect>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>
