@@ -1,8 +1,22 @@
 {
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Program Files (x86)\\MySQL\\mysql-connector-j-9.2.0\\mysql-connector-j-9.2.0.jar"
-    ]
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "c:\\Program Files (x86)\\MySQL\\mysql-connector-j-9.2.0\\mysql-connector-j-9.2.0.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx.base.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx.controls.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx.fxml.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx.graphics.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx.media.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx.swing.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx.web.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-17.0.15_windows-x64_bin-sdk\\javafx-sdk-17.0.15\\lib\\javafx-swt.jar"
+        ],
+        "exclude": [
+            "c:\\Users\\herna\\Downloads\\openjfx-24.0.1_windows-x64_bin-sdk\\javafx-sdk-24.0.1\\lib\\javafx.base.jar",
+            "c:\\Users\\herna\\Downloads\\openjfx-24.0.1_windows-x64_bin-sdk\\javafx-sdk-24.0.1\\lib\\javafx.controls.jar"
+        ]
+    }
 }
