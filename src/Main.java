@@ -15,8 +15,9 @@ public class Main {
             System.out.println("5. Show Employee Info with Pay History");
             System.out.println("6. Total Pay by Job Title for a Month");
             System.out.println("7. Total Pay by Division for a Month");
+            System.out.println("8. Update Full Employee Data");
             System.out.println("0. Exit");
-            System.out.print("Enter choice (0–7): ");
+            System.out.print("Enter choice (0–8): ");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -79,7 +80,9 @@ public class Main {
                     double max = scanner.nextDouble();
                     System.out.print("Enter percentage to increase: ");
                     double percent = scanner.nextDouble();
+                    scanner.nextLine();
                     db.increaseSalaryInRange(percent, min, max);
+                    System.out.println("✅ Applied raise to employees between $" + min + " and $" + max + " by " + percent + "%");
                     break;
 
                 case 4:
@@ -99,7 +102,7 @@ public class Main {
                     break;
 
                 case 5:
-                    db.showEmployeeWithPayHistory();
+                    System.out.println(db.getEmployeePayHistory());
                     break;
 
                 case 6:
@@ -108,7 +111,7 @@ public class Main {
                     System.out.print("Enter year (e.g., 2024): ");
                     int jobYear = scanner.nextInt();
                     scanner.nextLine();
-                    db.totalPayByJobTitleForMonth(jobMonth, jobYear);
+                    System.out.println(db.getTotalPayByJobTitleForMonth(jobMonth, jobYear));
                     break;
 
                 case 7:
@@ -117,7 +120,30 @@ public class Main {
                     System.out.print("Enter year (e.g., 2024): ");
                     int divYear = scanner.nextInt();
                     scanner.nextLine();
-                    db.totalPayByDivisionForMonth(divMonth, divYear);
+                    System.out.println(db.getTotalPayByDivisionForMonth(divMonth, divYear));
+                    break;
+
+                case 8:
+                    System.out.print("Enter Employee ID to update: ");
+                    int updateId = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter new name: ");
+                    String newName = scanner.nextLine();
+                    System.out.print("Enter new department: ");
+                    String newDept = scanner.nextLine();
+                    System.out.print("Enter new job title: ");
+                    String newTitle = scanner.nextLine();
+                    System.out.print("Enter new salary: ");
+                    double newSal = scanner.nextDouble();
+                    scanner.nextLine();
+                    System.out.print("Enter new SSN (no dashes): ");
+                    String newSSN = scanner.nextLine();
+                    System.out.print("Enter new role: ");
+                    String newRole = scanner.nextLine();
+
+                    Employee fullUpdateEmp = new Employee(updateId, newName, newDept, newTitle, newSal, newSSN, newRole);
+                    boolean result = db.updateEmployee(fullUpdateEmp);
+                    System.out.println(result ? "✅ Full employee info updated." : "❌ Update failed.");
                     break;
 
                 default:
@@ -126,5 +152,3 @@ public class Main {
         }
     }
 }
-
-

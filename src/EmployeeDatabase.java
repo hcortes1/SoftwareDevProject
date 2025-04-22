@@ -4,7 +4,6 @@ import java.util.List;
 
 public class EmployeeDatabase {
 
-    // 🔍 Search by empid, name, or ssn
     public Employee searchEmployee(String keyword) {
         String sql = "SELECT * FROM employee WHERE empid = ? OR name = ? OR ssn = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -32,7 +31,6 @@ public class EmployeeDatabase {
         return null;
     }
 
-    // ✏️ Update employee information
     public boolean updateEmployee(Employee emp) {
         String sql = "UPDATE employee SET name = ?, department = ?, job_title = ?, salary = ?, ssn = ?, role = ? WHERE empid = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -46,17 +44,16 @@ public class EmployeeDatabase {
             stmt.setString(6, emp.getRole());
             stmt.setInt(7, emp.getEmpId());
 
-            int updated = stmt.executeUpdate();
-            return updated > 0;
+            return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    // 💸 Increase salary for employees in a given range
-    public void increaseSalaryInRange(double percent, double min, double max) {
+    public String increaseSalaryInRange(double percent, double min, double max) {
         String sql = "UPDATE employee SET salary = salary * ? WHERE salary >= ? AND salary < ?";
+        StringBuilder result = new StringBuilder();
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -64,38 +61,16 @@ public class EmployeeDatabase {
             stmt.setDouble(2, min);
             stmt.setDouble(3, max);
 
-            int affected = stmt.executeUpdate();
-            System.out.println(affected + " employee(s) had their salary increased.");
+            int count = stmt.executeUpdate();
+            result.append("✅ ").append(count).append(" employee(s) had their salary increased.\n");
         } catch (SQLException e) {
-            e.printStackTrace();
+            result.append("❌ Error: ").append(e.getMessage()).append("\n");
         }
+        return result.toString();
     }
 
-    // 📋 Report 1: Show all employee info
-    public void showAllEmployeeInfo() {
-        String sql = "SELECT * FROM employee";
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            System.out.println("=== All Employees ===");
-            while (rs.next()) {
-                System.out.printf("[%d] %s | Dept: %s | Title: %s | Salary: $%.2f | SSN: %s | Role: %s\n",
-                        rs.getInt("empid"),
-                        rs.getString("name"),
-                        rs.getString("department"),
-                        rs.getString("job_title"),
-                        rs.getDouble("salary"),
-                        rs.getString("ssn"),
-                        rs.getString("role"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 📊 Full-time employee info with pay statement history
-    public void showEmployeeWithPayHistory() {
+    public String getEmployeePayHistory() {
+        StringBuilder sb = new StringBuilder();
         String sql = """
             SELECT e.empid, e.name, e.department, e.job_title, e.salary, e.role,
                    ps.month, ps.year, ps.amount
@@ -108,35 +83,35 @@ public class EmployeeDatabase {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.println("=== Employee Info with Pay History ===");
             int lastEmpId = -1;
             while (rs.next()) {
                 int empId = rs.getInt("empid");
                 if (empId != lastEmpId) {
-                    System.out.printf("\n[%d] %s | Dept: %s | Title: %s | Role: %s | Current Salary: $%.2f\n",
-                            empId,
-                            rs.getString("name"),
-                            rs.getString("department"),
-                            rs.getString("job_title"),
-                            rs.getString("role"),
-                            rs.getDouble("salary"));
-                    System.out.println("Pay History:");
+                    sb.append(String.format("\n[%d] %s | Dept: %s | Title: %s | Role: %s | Current Salary: $%.2f\n",
+                        empId,
+                        rs.getString("name"),
+                        rs.getString("department"),
+                        rs.getString("job_title"),
+                        rs.getString("role"),
+                        rs.getDouble("salary")));
+                    sb.append("Pay History:\n");
                     lastEmpId = empId;
                 }
                 String month = rs.getString("month");
                 int year = rs.getInt("year");
                 double amount = rs.getDouble("amount");
                 if (month != null) {
-                    System.out.printf("   - %s %d: $%.2f\n", month, year, amount);
+                    sb.append(String.format("   - %s %d: $%.2f\n", month, year, amount));
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            sb.append("Error: ").append(e.getMessage());
         }
+        return sb.toString();
     }
 
-    // 📊 Total pay by job title for a given month
-    public void totalPayByJobTitleForMonth(String month, int year) {
+    public String getTotalPayByJobTitleForMonth(String month, int year) {
+        StringBuilder sb = new StringBuilder("=== Total Pay by Job Title for " + month + " " + year + " ===\n");
         String sql = """
             SELECT e.job_title, SUM(ps.amount) AS total
             FROM pay_statement ps
@@ -152,17 +127,17 @@ public class EmployeeDatabase {
             stmt.setInt(2, year);
 
             ResultSet rs = stmt.executeQuery();
-            System.out.printf("=== Total Pay for %s %d by Job Title ===\n", month, year);
             while (rs.next()) {
-                System.out.printf("%s: $%.2f\n", rs.getString("job_title"), rs.getDouble("total"));
+                sb.append(String.format("%s: $%.2f\n", rs.getString("job_title"), rs.getDouble("total")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            sb.append("Error: ").append(e.getMessage());
         }
+        return sb.toString();
     }
 
-    // 📊 Total pay by division for a given month
-    public void totalPayByDivisionForMonth(String month, int year) {
+    public String getTotalPayByDivisionForMonth(String month, int year) {
+        StringBuilder sb = new StringBuilder("=== Total Pay by Division for " + month + " " + year + " ===\n");
         String sql = """
             SELECT e.department AS division, SUM(ps.amount) AS total
             FROM pay_statement ps
@@ -178,52 +153,15 @@ public class EmployeeDatabase {
             stmt.setInt(2, year);
 
             ResultSet rs = stmt.executeQuery();
-            System.out.printf("=== Total Pay for %s %d by Division ===\n", month, year);
             while (rs.next()) {
-                System.out.printf("%s: $%.2f\n", rs.getString("division"), rs.getDouble("total"));
+                sb.append(String.format("%s: $%.2f\n", rs.getString("division"), rs.getDouble("total")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            sb.append("Error: ").append(e.getMessage());
         }
+        return sb.toString();
     }
 
-    // 📋 Show total pay by job title (current salary)
-    public void showTotalPayByJobTitle() {
-        String sql = "SELECT job_title, SUM(salary) AS total_pay FROM employee GROUP BY job_title";
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            System.out.println("=== Total Pay by Job Title (Current Salaries) ===");
-            while (rs.next()) {
-                System.out.printf("%s: $%.2f\n",
-                        rs.getString("job_title"),
-                        rs.getDouble("total_pay"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 📋 Show total pay by division (current salary)
-    public void showTotalPayByDivision() {
-        String sql = "SELECT department AS division, SUM(salary) AS total_pay FROM employee GROUP BY department";
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            System.out.println("=== Total Pay by Division (Current Salaries) ===");
-            while (rs.next()) {
-                System.out.printf("%s: $%.2f\n",
-                        rs.getString("division"),
-                        rs.getDouble("total_pay"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 🔄 Return list of employees
     public List<Employee> getAllEmployees() {
         List<Employee> list = new ArrayList<>();
         String sql = "SELECT * FROM employee";
