@@ -3,25 +3,31 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    // change URL, PASS to your own personal settings that you have for MYSQL, my settings won't work on your device. 
+
     private static final String URL = "jdbc:mysql://localhost:3306/employeeData?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-    private static final String USER = "root";
-    private static final String PASS = "PkhY7656+";
+    private static final String USER = "root"; // Change if needed
+    private static final String PASS = "maisha2013"; // Your MySQL password
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASS);
     }
 
-    // Temporary main method to test connection
+    // ✅ Test connection method
     public static void main(String[] args) {
         try {
+            // Manually load the MySQL JDBC driver (required for Java 17+)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
             Connection conn = getConnection();
             if (conn != null) {
-                System.out.println(" Successfully connected to the employeeData database!");
+                System.out.println("✅ Successfully connected to the employeeData database!");
                 conn.close();
             }
+        } catch (ClassNotFoundException e) {
+            System.out.println("JDBC Driver not found.");
+            e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println(" Connection failed.");
+            System.out.println( "Connection failed.");
             e.printStackTrace();
         }
     }

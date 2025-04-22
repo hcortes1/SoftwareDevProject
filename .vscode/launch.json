@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "java",
+        "name": "DBConnection",
+        "request": "launch",
+        "mainClass": "DBConnection",
+        "projectName": "SoftwareDevProject_5d422841"
+      },
+      {
+        "type": "java",
+        "name": "Main",
+        "request": "launch",
+        "mainClass": "Main",
+        "projectName": "SoftwareDevProject_5d422841"
+      },
+      {
+        "type": "java",
+        "name": "MainFX (JavaFX App)",
+        "request": "launch",
+        "mainClass": "MainFX",
+        "projectName": "SoftwareDevProject_5d422841",
+        "vmArgs": "--module-path /Users/hasinrahman/Documents/Softdev/project/SoftwareDevProject/javafx-sdk-24.0.1/lib --add-modules javafx.controls,javafx.fxml"
+      }
+    ]
+  }
+  

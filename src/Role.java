@@ -1,0 +1,8 @@
+public enum Role {
+    MANAGER,
+    HR_MANAGER,
+    HR_REPRESENTATIVE,
+    DEVELOPER,
+    SYSTEM_ANALYST,
+    INTERN
+}
