@@ -124,7 +124,7 @@ public class MainFX extends Application {
                 double max = Double.parseDouble(maxField.getText());
                 double percent = Double.parseDouble(percentField.getText());
                 db.increaseSalaryInRange(percent, min, max);
-                outputArea.setText("✅ Applied raise to employees between $" + min + " and $" + max + " by " + percent + "%");
+                outputArea.setText(" Applied raise to employees between $" + min + " and $" + max + " by " + percent + "%");
             } catch (Exception ex) {
                 outputArea.setText("Invalid input for salary range or percentage.");
             }
