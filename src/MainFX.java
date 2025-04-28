@@ -46,7 +46,8 @@ public class MainFX extends Application {
             Employee emp = db.searchEmployee(searchField.getText());
             if (emp != null) {
                 outputArea.setText("Found: " + emp.getName() + " | ID: " + emp.getEmpId() +
-                        " | Dept: " + emp.getDepartment() + "\nRole: " + emp.getRole());
+                        " | Dept: " + emp.getDepartment() + "\nRole: " + emp.getRole() +
+                        " | Salary: $" + emp.getSalary());
             } else {
                 outputArea.setText("Employee not found.");
             }
@@ -158,10 +159,10 @@ public class MainFX extends Application {
                     stmt.setString(5, ssn);
                     stmt.setString(6, role);
                     stmt.executeUpdate();
-                    outputArea.setText("✅ Employee added successfully!");
+                    outputArea.setText("Employee added successfully!");
                 }
             } catch (Exception ex) {
-                outputArea.setText("❌ Failed to add employee: " + ex.getMessage());
+                outputArea.setText(" Failed to add employee: " + ex.getMessage());
             }
         });
         VBox addBox = new VBox(5, addLabel, nameField, deptField, jobField, salaryField, ssnField, roleField, addBtn);

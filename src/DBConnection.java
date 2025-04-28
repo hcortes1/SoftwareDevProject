@@ -12,7 +12,7 @@ public class DBConnection {
         return DriverManager.getConnection(URL, USER, PASS);
     }
 
-    // ✅ Test connection method
+    //  Test connection method
     public static void main(String[] args) {
         try {
             // Manually load the MySQL JDBC driver (required for Java 17+)
@@ -20,7 +20,7 @@ public class DBConnection {
 
             Connection conn = getConnection();
             if (conn != null) {
-                System.out.println("✅ Successfully connected to the employeeData database!");
+                System.out.println(" Successfully connected to the employeeData database!");
                 conn.close();
             }
         } catch (ClassNotFoundException e) {
